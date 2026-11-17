@@ -4,6 +4,7 @@ import express from "express";
 import helmet from "helmet";
 import { prisma } from "./lib/prisma.js";
 import menuRoutes from "./routes/menuRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 const app = express();
 const port = Number(process.env.PORT ?? 8000);
@@ -26,6 +27,7 @@ app.get("/health/ready", async (_req, res) => {
 });
 
 app.use("/api/menu", menuRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error("Unhandled request error", error);
